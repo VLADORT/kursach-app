@@ -25,7 +25,7 @@ public class Employee {
     @Id
     @GeneratedValue(generator = "EMPLOYEES_ID_GENERATOR")
     @GenericGenerator(name = "EMPLOYEES_ID_GENERATOR", strategy = "native")
-    private int id;
+    private long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -60,12 +60,12 @@ public class Employee {
     private Integer personal_salary_allowance;
 
     @OneToMany(mappedBy = "employee", targetEntity = Accrual.class)
-    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.ALL})
+    @Cascade({CascadeType.ALL})
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set accruals = new HashSet();
 
     @OneToMany(mappedBy = "employee", targetEntity = VacationHistory.class)
-    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.ALL})
+    @Cascade({CascadeType.ALL})
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set vacation_history = new HashSet();
 }

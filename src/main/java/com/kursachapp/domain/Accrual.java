@@ -19,7 +19,7 @@ public class Accrual {
 	@Id	
 	@GeneratedValue(generator="ACCRUALS_ID_GENERATOR")	
 	@GenericGenerator(name="ACCRUALS_ID_GENERATOR", strategy="native")
-	private int id;
+	private long id;
 	
 	@ManyToOne(targetEntity= AccrualType.class, fetch=FetchType.LAZY)
 	@Cascade(CascadeType.ALL)

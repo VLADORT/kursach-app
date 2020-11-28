@@ -15,7 +15,7 @@ public class PremiumType {
     @Id
     @GeneratedValue(generator = "PREMIUM_TYPES_ID_GENERATOR")
     @GenericGenerator(name = "PREMIUM_TYPES_ID_GENERATOR", strategy = "native")
-    private int id;
+    private long id;
 
     @Column(name = "number_of_years", nullable = false)
     private int number_of_years;

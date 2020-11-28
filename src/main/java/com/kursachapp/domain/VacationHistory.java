@@ -18,7 +18,7 @@ public class VacationHistory {
     @Id
     @GeneratedValue(generator = "VACATION_HISTORY_ID_GENERATOR")
     @GenericGenerator(name = "VACATION_HISTORY_ID_GENERATOR", strategy = "native")
-    private int id;
+    private long id;
 
     @ManyToOne(targetEntity = Employee.class, fetch = FetchType.LAZY)
     @Cascade({CascadeType.ALL})

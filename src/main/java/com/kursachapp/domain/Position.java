@@ -21,7 +21,7 @@ public class Position {
     @Id
     @GeneratedValue(generator = "POSITIONS_ID_GENERATOR")
     @GenericGenerator(name = "POSITIONS_ID_GENERATOR", strategy = "native")
-    private int id;
+    private long id;
 
     @Column(name = "position_name", nullable = false)
     private String position_name;
@@ -33,7 +33,7 @@ public class Position {
     private int standard_vacation;
 
     @OneToMany(mappedBy = "position", targetEntity = Employee.class)
-    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.ALL})
+    @Cascade(CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set employees = new HashSet();
 }
