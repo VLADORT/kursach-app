@@ -1,13 +1,15 @@
-package com.kursachapp.domain;
+package com.kursachapp.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.*;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,21 +21,23 @@ public class Position {
 
     @Column(name = "id", nullable = false)
     @Id
-    @GeneratedValue(generator = "POSITIONS_ID_GENERATOR")
-    @GenericGenerator(name = "POSITIONS_ID_GENERATOR", strategy = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "position_name", nullable = false)
-    private String position_name;
+    private String positionName;
 
     @Column(name = "salary", nullable = false, precision = 19)
-    private BigDecimal salary;
+    private Float salary;
 
     @Column(name = "standard_vacation", nullable = false)
-    private int standard_vacation;
+    private int standardVacation;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy = "position", targetEntity = Employee.class)
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.SAVE_UPDATE)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set employees = new HashSet();
 }

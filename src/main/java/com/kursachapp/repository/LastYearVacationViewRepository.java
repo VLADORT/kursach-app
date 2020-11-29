@@ -1,9 +1,10 @@
 package com.kursachapp.repository;
 
-import com.kursachapp.domain.entity.Accrual;
+import com.kursachapp.domain.view.LastYearVacationView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AccrualsRepository extends JpaRepository<Accrual, Long> {
+public interface LastYearVacationViewRepository extends JpaRepository<LastYearVacationView, Long> {
+
 }

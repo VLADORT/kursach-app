@@ -1,9 +1,6 @@
-package com.kursachapp.domain;
+package com.kursachapp.domain.entity;
 
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Proxy;
 import javax.persistence.*;
 import java.util.Date;
@@ -16,12 +13,10 @@ public class VacationHistory {
 
     @Column(name = "id", nullable = false)
     @Id
-    @GeneratedValue(generator = "VACATION_HISTORY_ID_GENERATOR")
-    @GenericGenerator(name = "VACATION_HISTORY_ID_GENERATOR", strategy = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @ManyToOne(targetEntity = Employee.class, fetch = FetchType.LAZY)
-    @Cascade({CascadeType.ALL})
     @JoinColumns(value =
 	@JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false),
 			foreignKey = @ForeignKey(name = "vacation_history_employees_id_fk"))
@@ -29,12 +24,12 @@ public class VacationHistory {
 
     @Column(name = "vacation_start", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date vacation_start;
+    private Date vacationStart;
 
     @Column(name = "vacation_end", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date vacation_end;
+    private Date vacationEnd;
 
-    @Column(name = "vacation_left", nullable = false)
-    private int vacation_left;
+    @Column(name = "vacation_left")
+    private Integer vacationLeft;
 }

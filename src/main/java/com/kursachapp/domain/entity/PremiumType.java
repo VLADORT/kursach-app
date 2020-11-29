@@ -1,4 +1,4 @@
-package com.kursachapp.domain;
+package com.kursachapp.domain.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -13,16 +13,15 @@ public class PremiumType {
 
     @Column(name = "id", nullable = false)
     @Id
-    @GeneratedValue(generator = "PREMIUM_TYPES_ID_GENERATOR")
-    @GenericGenerator(name = "PREMIUM_TYPES_ID_GENERATOR", strategy = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "number_of_years", nullable = false)
-    private int number_of_years;
+    private int numberOfYears;
 
     @Column(name = "accrual_to_salary", nullable = false)
-    private int accrual_to_salary;
+    private Float accrualToSalary;
 
     @Column(name = "accrual_to_vacation")
-    private Integer accrual_to_vacation;
+    private Float accrualToVacation;
 }

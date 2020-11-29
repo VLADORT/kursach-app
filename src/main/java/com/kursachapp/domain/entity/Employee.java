@@ -1,6 +1,9 @@
-package com.kursachapp.domain;
+package com.kursachapp.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.*;
 import javax.persistence.Entity;
@@ -23,8 +26,7 @@ public class Employee {
 
     @Column(name = "id", nullable = false)
     @Id
-    @GeneratedValue(generator = "EMPLOYEES_ID_GENERATOR")
-    @GenericGenerator(name = "EMPLOYEES_ID_GENERATOR", strategy = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "name", nullable = false)
@@ -34,38 +36,43 @@ public class Employee {
     private String surname;
 
     @Column(name = "middle_name")
-    private String middle_name;
+    private String middleName;
 
     @Column(name = "personnel_number", nullable = false, length = 10)
-    private String personnel_number;
+    private String personnelNumber;
 
     @ManyToOne(targetEntity = Position.class, fetch = FetchType.LAZY)
-    @Cascade({CascadeType.ALL})
     @JoinColumns(
     		value = @JoinColumn(name = "position_id", referencedColumnName = "id", nullable = false),
 			foreignKey = @ForeignKey(name = "employees_positions_id_fk"))
     private Position position;
 
     @Column(name = "passport_number", nullable = false, length = 10)
-    private String passport_number;
+    private String passportNumber;
 
     @Column(name = "identification_code", nullable = false)
-    private int identification_code;
+    private int identificationCode;
 
     @Column(name = "start_date", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date start_date;
+    private Date startDate;
 
     @Column(name = "personal_salary_allowance")
-    private Integer personal_salary_allowance;
+    private Integer personalSalaryAllowance;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy = "employee", targetEntity = Accrual.class)
-    @Cascade({CascadeType.ALL})
+    @Cascade({CascadeType.SAVE_UPDATE})
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set accruals = new HashSet();
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy = "employee", targetEntity = VacationHistory.class)
-    @Cascade({CascadeType.ALL})
+    @Cascade({CascadeType.SAVE_UPDATE})
     @LazyCollection(LazyCollectionOption.FALSE)
-    private Set vacation_history = new HashSet();
+    private Set vacationHistory = new HashSet();
 }
