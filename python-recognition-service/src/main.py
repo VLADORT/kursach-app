@@ -4,10 +4,10 @@ from nn import nn
 import argparse
 
 
-### python main.py --tolabel
-### python main.py --augmentation=0000
-### python main.py  --gpu --test
-### python main.py  --gpu --train
+### python main1.py --tolabel
+### python main1.py --augmentation=0000
+### python main1.py  --gpu --test
+### python main1.py  --gpu --train
 
 def main():
     parser = argparse.ArgumentParser()

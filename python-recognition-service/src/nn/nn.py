@@ -142,9 +142,11 @@ def train():
 
 def test(nn=None):
     if nn is None:
+        print("========= IS NONE")
         nn = NeuralNetwork()
 
     if (nn.has_checkpoint()):
+        print("========= HAS CHECKPORIN")
         images = data.fetch_from_path(nn.dn_test)
         generator = nn.prepare_data(images)
 
@@ -155,14 +157,19 @@ def test(nn=None):
 
 
 def testBytes(bytes, nn=None):
+    print("TESTING BYTES ===============")
     if nn is None:
+        print("nn is None: ===============")
         nn = NeuralNetwork()
 
     if (nn.has_checkpoint()):
+        print("nn.has_checkpoint() ===============")
         image = data.fetch_from_bytes(bytes)
         generator = nn.prepare_data(image)
+        print("BEFORE RESULT ===============")
 
         result = nn.model.predict_generator(generator, 1, verbose=1)
+        print("AFTER RESULT ===============")
         return nn.return_predict_bytes(image, result)
     else:
         print(">> Model not found (%s)\n" % nn.fn_checkpoint)
